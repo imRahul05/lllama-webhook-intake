@@ -24,6 +24,11 @@ const log = (msg) => {
   console.log(`[${new Date().toISOString()}] ${msg}`);
 };
 
+// GET / - Health check
+app.get('/', (req, res) => {
+  res.send('LlamaParse Webhook Test Server is Running!');
+});
+
 // GET /jobs - List all jobs
 app.get('/jobs', (req, res) => {
   res.json(Object.values(jobs));

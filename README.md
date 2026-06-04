@@ -32,9 +32,10 @@ A minimal standalone Node.js application to verify LlamaParse webhooks end-to-en
    ```bash
    ngrok http 3000
    ```
+   Example: `PUBLIC_BASE_URL=https://lllama-webhook-intake.vercel.app`
 6. Start the server:
    ```bash
-   node index.js
+   npm start
    ```
 
 ## Vercel Deployment

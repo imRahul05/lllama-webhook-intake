@@ -1,0 +1,22 @@
+{
+  "name": "llamaparse-webhook-test",
+  "version": "1.0.0",
+  "description": "Standalone Node.js app to verify LlamaParse webhooks",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.17.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "form-data": "^4.0.5",
+    "multer": "^2.1.1",
+    "uuid": "^14.0.0"
+  }
+}

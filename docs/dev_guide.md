@@ -23,7 +23,7 @@ The flow is:
 2. Service validates env vars and file presence.
 3. Service sends the file to `https://api.cloud.llamaindex.ai/api/v1/parsing/upload`.
 4. Service includes webhook configuration with callback URL: `${PUBLIC_BASE_URL}/webhook`.
-5. LlamaParse starts processing and emits events (for example `parse.pending`, `parse.success`, `parse.error`).
+5. LlamaParse starts processing and emits events (e.g., `parse.pending`, `parse.success`, `parse.error`).
 6. LlamaParse calls `POST /webhook` with event payloads.
 7. Service deduplicates events by `event_id`, updates in-memory job state, and stores event history.
 8. Client polls `GET /jobs/:id` or `GET /jobs` for status and results.
@@ -126,7 +126,7 @@ Behavior:
   - `parse.error` -> `ERROR`
   - `parse.partial_success` -> `PARTIAL_SUCCESS`
   - `parse.cancelled` -> `CANCELLED`
-- Stores parsed data in `job.parsedContent` when `event_type` is `parse.success` and `payload.result` exists.
+- Uses `data` to resolve the job identity (`data.job_id`/`data.id`), then stores parsed data in `job.parsedContent` when `event_type` is `parse.success` and top-level `payload.result` exists.
 
 Response is always `200` with `{ "received": true }` to avoid repeated webhook retries caused by non-2xx responses.
 
@@ -173,7 +173,7 @@ Typical path:
 1. Upload request accepted -> local status `PROCESSING`.
 2. LlamaParse sends `parse.pending` -> local status `PENDING`.
 3. LlamaParse sends final event:
-   - `parse.success` -> `SUCCESS`, parsed output attached (if present), or
+   - `parse.success` -> `SUCCESS`, with parsed output stored in `parsedContent` from `payload.result` when provided, or
    - `parse.partial_success` -> `PARTIAL_SUCCESS`, or
    - `parse.error` -> `ERROR`, or
    - `parse.cancelled` -> `CANCELLED`.

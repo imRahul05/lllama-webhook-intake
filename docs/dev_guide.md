@@ -126,7 +126,8 @@ Behavior:
   - `parse.error` -> `ERROR`
   - `parse.partial_success` -> `PARTIAL_SUCCESS`
   - `parse.cancelled` -> `CANCELLED`
-- Uses `data` to resolve the job identity (`data.job_id`/`data.id`), then stores parsed data in `job.parsedContent` when `event_type` is `parse.success` and top-level `payload.result` exists.
+- Uses `data` to resolve job identity via `data.job_id` or `data.id`.
+- Stores parsed data in `job.parsedContent` when `event_type` is `parse.success` and top-level `payload.result` exists.
 
 Response is always `200` with `{ "received": true }` to avoid repeated webhook retries caused by non-2xx responses.
 
@@ -173,8 +174,8 @@ Typical path:
 1. Upload request accepted -> local status `PROCESSING`.
 2. LlamaParse sends `parse.pending` -> local status `PENDING`.
 3. LlamaParse sends final event:
-   - `parse.success` -> `SUCCESS`, or
-   - after `parse.success`, parsed output is stored in `parsedContent` from `payload.result` when provided, or
+   - `parse.success` -> `SUCCESS`
+   - after `parse.success`, parsed output is stored in `parsedContent` from `payload.result` when provided
    - `parse.partial_success` -> `PARTIAL_SUCCESS`, or
    - `parse.error` -> `ERROR`, or
    - `parse.cancelled` -> `CANCELLED`.

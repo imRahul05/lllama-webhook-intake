@@ -115,7 +115,7 @@ Receives LlamaParse webhook events.
 
 Behavior:
 
-- Reads `event_id`, `event_type`, and `data` from payload.
+- Reads `event_id`, `event_type`, and `data` from payload (and may also use `payload.result` when present).
 - Determines LlamaParse job ID from `data.job_id` or `data.id`.
 - Skips duplicate webhook events by checking `event_id` in `receivedEvents` set.
 - Finds matching local job by `llamaJobId`.
@@ -127,7 +127,7 @@ Behavior:
   - `parse.partial_success` -> `PARTIAL_SUCCESS`
   - `parse.cancelled` -> `CANCELLED`
 - Uses `data` to resolve job identity via `data.job_id` or `data.id`.
-- Stores parsed data in `job.parsedContent` when `event_type` is `parse.success` and top-level `payload.result` exists.
+- Stores parsed data in `job.parsedContent` when `event_type` is `parse.success` and `payload.result` exists.
 
 Response is always `200` with `{ "received": true }` to avoid repeated webhook retries caused by non-2xx responses.
 

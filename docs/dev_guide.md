@@ -13,7 +13,7 @@ This app is a small Express service that:
 - stores job/event state in memory,
 - exposes APIs to inspect job status and parsed output.
 
-Core file: `/tmp/workspace/imRahul05/lllama-webhook-intake/src/index.js`
+Core file: `src/index.js`
 
 ## 2) Architecture overview
 
@@ -41,7 +41,7 @@ The flow is:
 ### Install
 
 ```bash
-cd /tmp/workspace/imRahul05/lllama-webhook-intake
+cd your-project-directory/lllama-webhook-intake
 npm install
 ```
 

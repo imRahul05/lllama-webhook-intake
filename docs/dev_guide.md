@@ -41,7 +41,7 @@ The flow is:
 ### Install
 
 ```bash
-cd your-project-directory/lllama-webhook-intake
+cd your-project-directory
 npm install
 ```
 

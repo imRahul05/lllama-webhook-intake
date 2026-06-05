@@ -173,7 +173,8 @@ Typical path:
 1. Upload request accepted -> local status `PROCESSING`.
 2. LlamaParse sends `parse.pending` -> local status `PENDING`.
 3. LlamaParse sends final event:
-   - `parse.success` -> `SUCCESS`, with parsed output stored in `parsedContent` from `payload.result` when provided, or
+   - `parse.success` -> `SUCCESS`, or
+   - after `parse.success`, parsed output is stored in `parsedContent` from `payload.result` when provided, or
    - `parse.partial_success` -> `PARTIAL_SUCCESS`, or
    - `parse.error` -> `ERROR`, or
    - `parse.cancelled` -> `CANCELLED`.
